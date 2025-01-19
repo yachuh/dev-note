@@ -1,0 +1,20 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // 存檔的時候自動 autofix eslint的錯誤
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  // 寫 react也能啟用 tailwind 的自動提示
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  // 寫 react也能啟用 emmet
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "eslint.options": {
+    "overrideConfigFile": ".eslintrc.json"
+  },
+  "prettier.configPath": ".prettierrc"
+}
