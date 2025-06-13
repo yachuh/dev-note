@@ -35,6 +35,7 @@ const config: Config = {
             'classic',
             {
                 docs: {
+                    routeBasePath: '/',
                     sidebarPath: './sidebars.ts',
                     // Please change this to your repo.
                     // Remove this to remove the "edit this page" links.
@@ -84,39 +85,39 @@ const config: Config = {
         },
         footer: {
             style: 'dark',
-            links: [
-                {
-                    title: 'Docs',
-                    items: [
-                        {
-                            label: 'README',
-                            to: '/docs',
-                        },
-                    ],
-                },
-                {
-                    title: 'Community',
-                    items: [
-                        {
-                            label: 'Github',
-                            href: 'https://github.com/yachuh',
-                        },
-                        {
-                            label: 'LinkedIn',
-                            href: 'https://www.linkedin.com/in/hsieh-ya-chu/',
-                        },
-                    ],
-                },
-                // {
-                //     title: 'More',
-                //     items: [
-                //         {
-                //             label: 'Blog',
-                //             to: '/blog',
-                //         },
-                //     ],
-                // },
-            ],
+            // links: [
+            //     {
+            //         title: 'Docs',
+            //         items: [
+            //             {
+            //                 label: 'README',
+            //                 to: '/docs',
+            //             },
+            //         ],
+            //     },
+            //     {
+            //         title: 'Community',
+            //         items: [
+            //             {
+            //                 label: 'Github',
+            //                 href: 'https://github.com/yachuh',
+            //             },
+            //             {
+            //                 label: 'LinkedIn',
+            //                 href: 'https://www.linkedin.com/in/hsieh-ya-chu/',
+            //             },
+            //         ],
+            //     },
+            //     // {
+            //     //     title: 'More',
+            //     //     items: [
+            //     //         {
+            //     //             label: 'Blog',
+            //     //             to: '/blog',
+            //     //         },
+            //     //     ],
+            //     // },
+            // ],
             copyright: `Copyright © ${new Date().getFullYear()} Yachu. Built with Docusaurus.`,
         },
         prism: {
