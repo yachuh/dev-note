@@ -1,9 +1,9 @@
 ---
-sidebar_label: '[HTML] 區塊元素 vs 行內元素'
+sidebar_label: '[HTML] 區塊元素 vs. 行內元素'
 sidebar_position: 2
 ---
 
-# [HTML] 區塊元素(block element) vs 行內元素(inline element)
+# [HTML] 區塊元素(block element) vs. 行內元素(inline element)
 
 ## 區塊元素 block element
 
@@ -11,9 +11,10 @@ sidebar_position: 2
 display: block
 ```
 
--   盡可能佔滿整個版面（依照父元素的寬度）
--   可以設定寬、高：應避免寫死高度，實際高度應由裡面元素的高度推擠而來
 -   另起一行呈現
+-   盡可能佔滿整個版面（依照父元素的寬度）
+-   可以設定寬、高
+    -   應避免寫死高度，實際高度應由裡面元素的高度推擠而來
 
 ### 常見的區塊元素標籤
 
@@ -54,3 +55,36 @@ display: inline
 :::tip
 實務上常將 `<a>` 設定成 `display:block` ，方便點擊
 :::
+
+## img
+
+-   屬於**行內元素(inline element)**
+-   屬於**空元素(empty element / void element)**：元素中沒有內容(HTML content)
+-   屬於**自閉合標籤(self-closing tag)**：沒有結束標籤(closing tag)
+-   利用屬性 `src` 來指定圖檔位址：`<img src="圖片位址">`
+-   圖片下方都預設會有 3px 的距離
+
+:::note
+[css - HTML 5 strange img always adds 3px margin at bottom - Stack Overflow](https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom)
+:::
+
+### 如何清除 img 下方的多餘空白
+
+1. 使用 `vertical-allign: middle`
+
+    ```css
+    img {
+        vertical-allign: middle;
+    }
+    ```
+
+2. 使用 `display: block`
+    ```css
+    img {
+        display: block;
+    }
+    ```
+
+## Ref
+
+-   [\[HTML5\]b,i,s 跟 strong,em,del 這些看起來一樣，但意義不同的標籤們-HTML5 教學(nicetypo.com)](https://km.nicetypo.com/doc/ead903b94bb8bf01974d3ccdb91a117b)

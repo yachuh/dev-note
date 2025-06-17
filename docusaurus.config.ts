@@ -35,14 +35,14 @@ const config: Config = {
             'classic',
             {
                 docs: {
-                    routeBasePath: '/',
+                    routeBasePath: '/', // Serve the docs at the site's root
                     sidebarPath: './sidebars.ts',
                     // Please change this to your repo.
                     // Remove this to remove the "edit this page" links.
                     // editUrl:
                     //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
                 },
-                blog: false,
+                blog: false, // Disable the blog plugin
                 // blog: {
                 //     showReadingTime: true,
                 //     // Please change this to your repo.
