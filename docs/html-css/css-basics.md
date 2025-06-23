@@ -2,8 +2,6 @@
 
 CSS stands for "Cascading Style Sheets"
 
-CSS format:
-
 ```css
 Selector {
   property: value;
@@ -14,34 +12,46 @@ Selector {
 
 Three ways to add CSS:
 
-1. External CSS (in the `<head>` section): use **`<link>`** tag
-   ```html
-   <head>
-     <title>My first CSS website!</title>
-     <link rel="stylesheet" type="text/css" href="style.css" />
-   </head>
-   ```
-   - `rel` - relationship: `stylesheet`
-   - `type` - media type: `text/css`
-   - `href` - **H**ypertext **REF**erence: `style.css` (file path)
-2. Internal CSS (in the `<head>` section): The internal style is defined inside the **`<style>`** element, inside the head section
-   ```html
-   <head>
-     <title>My first CSS website!</title>
-     <style>
-       li {
-         background-color: green;
-       }
-     </style>
-   </head>
-   ```
-3. Inline CSS (inside an HTML element): add the **style** attribute to the relevant element: `style=""`
-   ```html
-   <h1 style="color:blue;text-align:center;">This is a heading</h1>
-   ```
+### External CSS
+
+> Use **`<link>`** tag (in the `<head>` section)
+
+```html
+<head>
+  <title>My first CSS website!</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+```
+
+- `rel` - relationship: `stylesheet`
+- `type` - media type: `text/css`
+- `href` - **H**ypertext **REF**erence: `style.css` (file path)
+
+### Internal CSS
+
+> The internal style is defined inside the **`<style>`** element(in the `<head>` section)
+
+```html
+<head>
+  <title>My first CSS website!</title>
+  <style>
+    li {
+      background-color: green;
+    }
+  </style>
+</head>
+```
+
+### Inline CSS
+
+> Add the **style** attribute to the relevant element: `style=""` (inside an HTML element)
+
+```html
+<h1 style="color:blue;text-align:center;">This is a heading</h1>
+```
 
 :::info
-💡 The value from the last read style sheet will be used. So an **inline style has the highest priority**, and will override external and internal styles and browser defaults.
+The value from the last read style sheet will be used. So an **inline style has the highest priority**, and will override external and internal styles and browser defaults.
 Ref. [How to add CSS (w3schools.com)](https://www.w3schools.com/css/css_howto.asp)
 :::
 
@@ -77,7 +87,9 @@ Select elements based on name, id, class.
 - `#id` : unique (should prevent using id)
 - `*`: all elemnets
 
-### 2. [Combinator selectors](https://www.w3schools.com/css/css_combinators.asp)
+### 2. Combinator selectors
+
+> [Combinator selectors](https://www.w3schools.com/css/css_combinators.asp)
 
 Select elements based on a specific relationship between them.
 
@@ -87,9 +99,11 @@ Select elements based on a specific relationship between them.
 - `element + element` - adjacent sibling selector (+)
 - `element ~ element` - general sibling selector (~)
 
-#### 3. [Pseudo-class selectors](https://www.w3schools.com/css/css_pseudo_classes.asp)
+### 3. Pseudo-class selectors
 
-Select elements based on a certain state): to define a special state of an element.
+> [Pseudo-class selectors](https://www.w3schools.com/css/css_pseudo_classes.asp)
+
+Select elements based on a certain state: to define a special state of an element.
 
 - Anchor Pseudo-classes
   - `element:link`
@@ -99,15 +113,19 @@ Select elements based on a certain state): to define a special state of an eleme
 - `:first-child` Pseudo-class
 - `:last-child` Pseudo-class
 
-### 4. [Pseudo-elements selectors](https://www.w3schools.com/css/css_pseudo_elements.asp) 
+### 4. Pseudo-elements selectors
+
+> [Pseudo-elements selectors](https://www.w3schools.com/css/css_pseudo_elements.asp)
 
 Select and style a part of an element.
 
-### 5. [Attribute selectors](https://www.w3schools.com/css/css_attribute_selectors.asp)
+### 5. Attribute selectors
+
+> [Attribute selectors](https://www.w3schools.com/css/css_attribute_selectors.asp)
 
 Select elements based on an attribute or attribute value.
 
-::: info
+:::info
 
 - [CSS Selectors Reference (w3schools.com)](https://www.w3schools.com/cssref/css_selectors.asp)
 - [Cascade and inheritance - Learn web development | MDN (mozilla.org)](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance)
@@ -117,60 +135,8 @@ Select elements based on an attribute or attribute value.
 ## CSS Comments
 
 ```css
-/*** This is a single-line comment ***/
+/* This is a single-line comment */
 ```
-
-## CSS Backgrounds
-
-:::info
-[CSS - Background](/CumEsJrJR9aagb934oRFAg)
-:::
-
-### `background-color`
-
-- Transparency
-  - `opacity`: 0.0 - 1.0. The lower value, the more transparent
-  - `rgba`: The *alpha* parameter is a number between 0.0 (fully transparent) and 1.0 (fully opaque).
-    ```css
-    div {
-      background: rgba(0, 128, 0, 0.3); /* Green background with 30% opacity */
-    }
-    ```
-
-### `background-image`
-
-```css
-body {
-  background-color: #ffffff;
-  background-image: url('img_tree.png');
-  background-repeat: no-repeat;
-  background-position: right top;
-  background-attachment: fixed;
-}
-```
-
-- `background-repeat`: repeat-x (repeated only horizontally), no-repeat
-  (By default, the `background-image` property repeats an image both horizontally and vertically.)
-- `background-attachment`: background image should scroll or be fixed. scroll or fixed
-- `background-position`
-
-### `background` (shorthand property)
-
-Specify all the background properties in one single property.
-
-```css
-body {
-  background: #ffffff url('img_tree.png') no-repeat right top;
-}
-```
-
-When using the shorthand property the order of the property values is:
-
-1. `background-color`
-2. `background-image`
-3. `background-repeat`
-4. `background-attachment`
-5. `background-position`
 
 ## CSS borders
 
@@ -181,46 +147,6 @@ The `border` property is a shorthand property for the following individual bor
 - `border-width`
 - `border-style` (required)
 - `border-color`
-
-## Fonts, Images, Box Model
-
-### Fonts
-
-[CSS - Fonts](/qkRM9O3NR6-am5KhQSWxdA)
-
-### Image
-
-```css
-img {
-  float: left;
-}
-
-footer {
-  clear: both;
-}
-```
-
-Remove extra space under image:
-
-```css
-img {
-  display: block;
-}
-
-/* OR */
-
-img {
-  vertical-align: middle;
-}
-```
-
-### Box model
-
-```CSS
-*, *::before, *::after {
-    box-sizing: box-border;
-}
-```
 
 ## Icons
 
