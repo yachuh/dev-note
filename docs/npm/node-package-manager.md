@@ -1,9 +1,8 @@
 ---
-title: '[Note] NPM 筆記'
 tags: [npm]
 ---
 
-# [Note] NPM 筆記
+# [Note] NPM
 
 **NPM**，全名 **Node Package Manager** 套件管理工具，是 Node.js 預設的 node 套件管理工具，在本機端安裝 Node.js 時也會一併安裝。主要用於管理基於 Node.js 的 JavaScript 套件。
 
@@ -48,12 +47,28 @@ npm run <script>                      # 執行 package.json 中定義的腳本
 初始化專案：
 
 ```bash
-npm init
+npm init        # 初始化專案
+npm install     # 安裝套件
 ```
 
 - **package.json**：會新增一個 `package.json` 檔案，來保存所有關於套件的相關配置檔資訊。
 - **package-lock.json**：安裝第一個套件後會再多出一個 `package-lock.json` 檔案來保存安裝紀錄。
 - **node_modules**：所有下載的函式庫都會放在這個資料夾。
+
+#### package.json 和 package.lock.json 個別用途
+
+- **package.json** 是執行 `npm init` 時所生成的，用來描述專案以及專案依賴 (dependency) 的相關套件訊息。
+- **package.lock.json** 是執行 `npm install` 時生成的，用來記錄當前狀態下實際安裝的各個 npm 套件具體來源和版號（可以用來鎖定版本）。
+
+使用 `npm install` 時會安裝 package.lock.json 中指定的大版本號的最新小版本號：
+
+```json
+{
+  "react": "^18.2.0", // 匹配 18.x.x 的最新版本
+  "react-dom": "~18.2.0", // 匹配 18.2.x 的最新版本
+  "react-refresh": "0.11.0" // 匹配 0.11.0 版本，不會更新最新版本
+}
+```
 
 ### 安裝環境
 

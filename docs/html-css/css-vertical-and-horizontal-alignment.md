@@ -21,11 +21,11 @@
 
 使用 flexbox 排版 `display: flex` 搭配屬性 `justify-content`（主軸對齊方式）、 `align-items` （交錯軸對齊方式）來將 div 裡的文字置中。
 
--   在父層(container) `div` 下 `display: flex;`
+- 在父層(container) `div` 下 `display: flex;`
 
 #### 水平置中
 
--   -v加上 `justify-content: center;` 屬性來讓主軸（水平）置中對齊
+- -v加上 `justify-content: center;` 屬性來讓主軸（水平）置中對齊
 
 #### 垂直置中
 
@@ -37,9 +37,9 @@
 
 ```css
 div {
-    display: flex;
-    justify-content: center; /* 水平置中 */
-    align-items: center; /* 垂直置中 */
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
 }
 ```
 
@@ -47,18 +47,18 @@ div {
 
 > 較不推薦使用。不夠彈性，只能用在單行文字的垂直置中。
 
--   `text-align` 大家應該不陌生，設定文字對齊方式 `text-align: center;` 來將文字水平置中。
--   `line-height` 的作用顧名思義就是設定了文字的行高，文字會放置在這一行空間的垂直置中位置。
+- `text-align` 大家應該不陌生，設定文字對齊方式 `text-align: center;` 來將文字水平置中。
+- `line-height` 的作用顧名思義就是設定了文字的行高，文字會放置在這一行空間的垂直置中位置。
 
 假設文字的尺寸 (font-size) 是 12px，行高 (line-height) 是 20px，那麼文字會被置於在高 20px 的行盒 (line box) 中，上下會各留有 4px 的距離。
 
 #### 水平置中
 
--   設定 `text-align: center;` 將文字水平置中
+- 設定 `text-align: center;` 將文字水平置中
 
 #### 垂直置中
 
--   將 `line-height` 與 `div` 設定同高，就可以做到單行文字垂直置中的效果
+- 將 `line-height` 與 `div` 設定同高，就可以做到單行文字垂直置中的效果
 
 #### 水平垂直置中
 
@@ -66,11 +66,11 @@ div {
 
 ```css
 div {
-    background: yellow;
-    width: 500px;
-    height: 100px;
-    line-height: 100px; /* 文字垂直置中 */
-    text-align: center; /* 文字水平置中 */
+  background: yellow;
+  width: 500px;
+  height: 100px;
+  line-height: 100px; /* 文字垂直置中 */
+  text-align: center; /* 文字水平置中 */
 }
 ```
 
@@ -85,12 +85,12 @@ div {
 
 #### 水平置中
 
--   設定 `text-align: center;` 將文字水平置中
+- 設定 `text-align: center;` 將文字水平置中
 
 #### 垂直置中
 
--   在父層下 `display: table;` 將元素轉為 table
--   在子層下 `display: table-cell;`
+- 在父層下 `display: table;` 將元素轉為 table
+- 在子層下 `display: table-cell;`
 
 #### 水平垂直置中
 
@@ -99,13 +99,13 @@ div {
 ```css
 /* 父層 div */
 .parent {
-    display: table;
+  display: table;
 }
 /* 子層 p */
 .child {
-    display: table-cell;
-    vertical-align: middle; /* 表格文字垂直置中 */
-    text-align: center; /* 表格文字垂直置中 */
+  display: table-cell;
+  vertical-align: middle; /* 表格文字垂直置中 */
+  text-align: center; /* 表格文字垂直置中 */
 }
 ```
 
@@ -117,15 +117,15 @@ div {
 
 使用 flexbox 排版 `display: flex` 搭配屬性 `justify-content`（主軸對齊方式）、 `align-item` （交錯軸對齊方式）來將父層 div 裡的子層 items 置中。
 
--   在父層(container) `div` 下 `display: flex;`
+- 在父層(container) `div` 下 `display: flex;`
 
 #### 水平置中
 
--   加上 `justify-content: center;` 來讓主軸（水平）置中對齊
+- 加上 `justify-content: center;` 來讓主軸（水平）置中對齊
 
 #### 垂直置中
 
--   加上 `align-items: center;` 來讓交錯軸（垂直）置中對齊
+- 加上 `align-items: center;` 來讓交錯軸（垂直）置中對齊
 
 #### 水平垂直置中
 
@@ -133,21 +133,21 @@ div {
 
 ```css
 div {
-    display: flex;
-    justify-content: center; /* item 水平置中 */
-    align-items: center; /* item 垂直置中 */
+  display: flex;
+  justify-content: center; /* item 水平置中 */
+  align-items: center; /* item 垂直置中 */
 }
 ```
 
 ### grid（推薦）
 
--   在父層 `div` (container) 下 `display: grid;`
--   加上 `place-items: center;` 或是 `place-content: center;` 來將子層 `div` 水平、垂直置中排列
+- 在父層 `div` (container) 下 `display: grid;`
+- 加上 `place-items: center;` 或是 `place-content: center;` 來將子層 `div` 水平、垂直置中排列
 
 ```css
 .parent {
-    display: grid;
-    place-items: center; /* 或使用 place-content: center; */
+  display: grid;
+  place-items: center; /* 或使用 place-content: center; */
 }
 ```
 
@@ -159,8 +159,8 @@ div {
 
 `place-items` 屬性是 `align-items` 和 `justify-items` 的簡寫
 
--   `align-items` 控制 Grid 容器內所有**子元素**在**垂直**方向上的對齊方式
--   `justify-items` 控制 Grid 容器內所有**子元素**在**水平**方向上的對齊方式
+- `align-items` 控制 Grid 容器內所有**子元素**在**垂直**方向上的對齊方式
+- `justify-items` 控制 Grid 容器內所有**子元素**在**水平**方向上的對齊方式
 
 `place-items: center;` 會將 Grid 容器內的所有**子元素**都**水平**和**垂直置中**對齊。
 
@@ -168,8 +168,8 @@ div {
 
 `place-content` 屬性是 `justify-content` 和 `align-content` 的簡寫
 
--   `align-content` 控制 Grid 容器內所有**行**的對齊方式
--   `justify-content` 控制Grid容器內所有**列**的對齊方式
+- `align-content` 控制 Grid 容器內所有**行**的對齊方式
+- `justify-content` 控制Grid容器內所有**列**的對齊方式
 
 `place-content: center;` 會將 Grid 容器的內容（即**子元素佔據的所有行和列**）**水平**和**垂直置中**對齊。
 
@@ -179,37 +179,37 @@ div {
 
 #### 先設定絕對定位
 
--   在父層 `div` 下 `position: relative;`
--   在子層 `div` 下 `position: absolute;`
+- 在父層 `div` 下 `position: relative;`
+- 在子層 `div` 下 `position: absolute;`
 
 接著再增加下列 CSS 屬性來達到水平或是垂直置中：
 
 #### 水平置中
 
--   加上 `left: 50%;` 將子層 `div` 左邊界設定在父層 `div` 寬度一半的位置
--   加上 `transform: translateX(-50%)` 將超過的部分修正回來
+- 加上 `left: 50%;` 將子層 `div` 左邊界設定在父層 `div` 寬度一半的位置
+- 加上 `transform: translateX(-50%)` 將超過的部分修正回來
 
 #### 垂直置中
 
--   加上 `top: 50%;` 將子層 `div` 上邊界設定在父層 `div` 高度一半的位置
--   加上 `transform: translateY(-50%)` 將超過的部分修正回來
+- 加上 `top: 50%;` 將子層 `div` 上邊界設定在父層 `div` 高度一半的位置
+- 加上 `transform: translateY(-50%)` 將超過的部分修正回來
 
 #### 水平垂直置中
 
--   綜合 `top: 50%;` 與 `left: 50%;` 將子層 `div` 置於父層 `div` 高度與寬度一半的位置，但此時可以看到，元素並非位於畫面的正中間
--   加上 `transform: translate(-50%, -50%)` 給予負值，將超過的 X 軸與 Y 軸部分修正回來
+- 綜合 `top: 50%;` 與 `left: 50%;` 將子層 `div` 置於父層 `div` 高度與寬度一半的位置，但此時可以看到，元素並非位於畫面的正中間
+- 加上 `transform: translate(-50%, -50%)` 給予負值，將超過的 X 軸與 Y 軸部分修正回來
 
 ```css
 /* 父層 div */
 .parent {
-    position: relative;
+  position: relative;
 }
 /* 子層 div */
 .child {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 ```
 
@@ -226,8 +226,8 @@ div {
 :::important
 由於 `auto` 會將剩餘空間分配，因此
 
--   `margin-left: auto` 會使元素**靠右**擺放
--   `margin-right: auto` 會使元素**靠左**擺放
+- `margin-left: auto` 會使元素**靠右**擺放
+- `margin-right: auto` 會使元素**靠左**擺放
 
 :::
 
@@ -235,13 +235,13 @@ div {
 
 將在想要置中的元素（子層 `div` ）：
 
--   設定寬度 `width`：一定要設置寬度，避免該元素從左到右撐滿容器（使用 `max-width` 是更理想的做法，可以避免當瀏覽器寬度小於元素寬度時出現 x 軸）
--   加上 `margin: 0 auto;` 將左右（水平）的外邊距設定為 `auto` ：這代表瀏覽器會自動將剩餘的空間平均分配給左、右外邊距，於是就達成了水平置中的效果
+- 設定寬度 `width`：一定要設置寬度，避免該元素從左到右撐滿容器（使用 `max-width` 是更理想的做法，可以避免當瀏覽器寬度小於元素寬度時出現 x 軸）
+- 加上 `margin: 0 auto;` 將左右（水平）的外邊距設定為 `auto` ：這代表瀏覽器會自動將剩餘的空間平均分配給左、右外邊距，於是就達成了水平置中的效果
 
 ```css
 .child {
-    max-width: 100px;
-    margin: 0 auto; /* 或使用 margin: auto; */
+  max-width: 100px;
+  margin: 0 auto; /* 或使用 margin: auto; */
 }
 ```
 
@@ -275,25 +275,25 @@ div {
 
 可以得到結論：
 
--   當 `margin-left` 和 `margin-right` 都是 auto，則它們的**值相等**，進而使元素在容器中水平居中對齊
--   當 `margin-top` 和 `margin-bottom` 都是 auto，則它們的**值都為 0**，因此也無法使元素在容器中垂直居中對齊
+- 當 `margin-left` 和 `margin-right` 都是 auto，則它們的**值相等**，進而使元素在容器中水平居中對齊
+- 當 `margin-top` 和 `margin-bottom` 都是 auto，則它們的**值都為 0**，因此也無法使元素在容器中垂直居中對齊
 
 #### 水平垂直置中：margin auto + flex | grid
 
--   在父層 `div` 下 `display: flex | grid | inline-flex | inline-grid;`
--   在子層 `div` 下 `margin: auto;` 來達成水平、垂直置中的效果
+- 在父層 `div` 下 `display: flex | grid | inline-flex | inline-grid;`
+- 在子層 `div` 下 `margin: auto;` 來達成水平、垂直置中的效果
 
 那為什麼這邊的 `margin: auto;` 又對垂直置中有作用了呢？
 
 因為 flex box 和 grid 的佈局系統讓元素的對齊和佈局更加靈活了，在這些佈局中 `margin: auto;` 可以用於實現元素的水平和垂直置中。
 
--   Flexbox：將 `margin: auto;` 用於 Flex 容器內的子元素，可以使子元素在**垂直和水平方向上**都居中對齊。
--   Grid：將 `margin: auto;` 用於 Grid 容器內的子元素，可以使子元素在**網格單元格**中水平和垂直置中。
+- Flexbox：將 `margin: auto;` 用於 Flex 容器內的子元素，可以使子元素在**垂直和水平方向上**都居中對齊。
+- Grid：將 `margin: auto;` 用於 Grid 容器內的子元素，可以使子元素在**網格單元格**中水平和垂直置中。
 
 # Ref
 
--   [[CSS\] 垂直置中的方法 | PJCHENder 未整理筆記](https://pjchender.dev/css/css-center-center/)
--   [Centering in CSS: A Complete Guide | CSS-Tricks](https://css-tricks.com/centering-css-complete-guide/)
--   [使用 Grid + margin 來達到垂直置中目的 - iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天](https://ithelp.ithome.com.tw/articles/10206523)
--   [Why does margin-top:auto and margin-bottom: auto not work ? : r/webdev](https://www.reddit.com/r/webdev/comments/5ttih0/why_does_margintopauto_and_marginbottom_auto_not/)
--   [探秘 flex 上下文中神奇的自動 margin，乾貨！網友都感動哭了](https://kknews.cc/zh-tw/code/pl88x5p.html)
+- [[CSS\] 垂直置中的方法 | PJCHENder 未整理筆記](https://pjchender.dev/css/css-center-center/)
+- [Centering in CSS: A Complete Guide | CSS-Tricks](https://css-tricks.com/centering-css-complete-guide/)
+- [使用 Grid + margin 來達到垂直置中目的 - iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天](https://ithelp.ithome.com.tw/articles/10206523)
+- [Why does margin-top:auto and margin-bottom: auto not work ? : r/webdev](https://www.reddit.com/r/webdev/comments/5ttih0/why_does_margintopauto_and_marginbottom_auto_not/)
+- [探秘 flex 上下文中神奇的自動 margin，乾貨！網友都感動哭了](https://kknews.cc/zh-tw/code/pl88x5p.html)

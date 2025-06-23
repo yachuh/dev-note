@@ -1,3 +1,7 @@
+---
+tags: [css, tailwind]
+---
+
 # [Note] Tailwind CSS 筆記
 
 > https://tailwindcss.com/

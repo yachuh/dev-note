@@ -11,16 +11,16 @@ sidebar_label: '[React] useReducer'
 
 在 React 中我們會使用 `useState` 來管理 state（狀態），但當一個頁面需要許多 state 同時存在，而且 state 之間存在邏輯關聯的情況時，可以改用 React 的另一個 hook — `useReducer` 來集中管理狀態與邏輯。
 
-### 基本用法
+## 基本用法
 
-```react
+```jsx
 const [state, dispatch] = useReducer(reducer, initialState);
 ```
 
--   `reducer` - 一個純函數，接收當前狀態並返回最新的狀態
--   `initialState` - 初始狀態值
--   `state` - 當前狀態
--   `dispatch` - 用來發送 action 的函數
+- `reducer` - 一個純函數，接收當前狀態並返回最新的狀態
+- `initialState` - 初始狀態值
+- `state` - 當前狀態
+- `dispatch` - 用來發送 action 的函數
 
 ## useState 與 useReducer
 
@@ -30,7 +30,7 @@ const [state, dispatch] = useReducer(reducer, initialState);
 
 當我們使用 `useState` 來管理每個表單欄位的狀態：
 
-```react
+```jsx
 import React, { useState } from 'react';
 
 const FormWithState = () => {
@@ -51,9 +51,24 @@ const FormWithState = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" value={name} onChange={handleNameChange} placeholder="Name" />
-      <input type="email" value={email} onChange={handleEmailChange} placeholder="Email" />
-      <input type="tel" value={phone} onChange={handlePhoneChange} placeholder="Phone" />
+      <input
+        type="text"
+        value={name}
+        onChange={handleNameChange}
+        placeholder="Name"
+      />
+      <input
+        type="email"
+        value={email}
+        onChange={handleEmailChange}
+        placeholder="Email"
+      />
+      <input
+        type="tel"
+        value={phone}
+        onChange={handlePhoneChange}
+        placeholder="Phone"
+      />
       <button type="submit">Submit</button>
     </form>
   );
@@ -74,7 +89,7 @@ export default FormWithState;
 
 當我們改用 `useReducer` 來管理表單狀態：
 
-```react
+```jsx
 import React, { useReducer } from 'react';
 
 // 定義初始狀態
@@ -114,9 +129,24 @@ const FormWithReducer = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" value={state.name} onChange={handleChange('name')} placeholder="Name" />
-      <input type="email" value={state.email} onChange={handleChange('email')} placeholder="Email" />
-      <input type="tel" value={state.phone} onChange={handleChange('phone')} placeholder="Phone" />
+      <input
+        type="text"
+        value={state.name}
+        onChange={handleChange('name')}
+        placeholder="Name"
+      />
+      <input
+        type="email"
+        value={state.email}
+        onChange={handleChange('email')}
+        placeholder="Email"
+      />
+      <input
+        type="tel"
+        value={state.phone}
+        onChange={handleChange('phone')}
+        placeholder="Phone"
+      />
       <button type="submit">Submit</button>
     </form>
   );
@@ -127,13 +157,13 @@ export default FormWithReducer;
 
 #### 使用 `useReducer` 的優點
 
-1. **集中管理狀態**：所有的狀態更新邏輯可以從元件中分離出來，並集中在 `reducer` 函數中，方便理解和維護，達到**關注點分離** (SOC, separation of concerns)。
-2. **減少重複程式碼**：避免在一個元件中使用多個 `useState` 並且透過一個 `dispatch` 函數就可以處理所有狀態的更新，不需要為每個欄位分別定義 handler function。
-3. **更好的擴展性**：隨著表單欄位的增加，只需在 `reducer` 函數中添加新的 case，而不必增加更多的 `useState` 和 handler 函數。
-4. **狀態變化更加可預測**：由於所有的狀態變化都通過 `dispatch` 和 `reducer` 進行管理，因此可以更清晰地看到每一個 action 是如何改變狀態的。
+1. **集中管理狀態**：所有的狀態更新邏輯可以從元件中分離出來，並集中在 `reducer` 函數中，方便理解和維護，達到**關注點分離** (SOC, separation of concerns)
+2. **減少重複程式碼**：避免在一個元件中使用多個 `useState` 並且透過一個 `dispatch` 函數就可以處理所有狀態的更新，不需要為每個欄位分別定義 handler function
+3. **更好的擴展性**：隨著表單欄位的增加，只需在 `reducer` 函數中添加新的 case，而不必增加更多的 `useState` 和 handler 函數
+4. **狀態變化更加可預測**：由於所有的狀態變化都通過 `dispatch` 和 `reducer` 進行管理，因此可以更清晰地看到每一個 action 是如何改變狀態的
 
 ### 使用情境
 
--   當 state 的更新邏輯比較複雜，或涉及多個子值時。
--   當下一個 state 依賴於前一個 state 的值時。
--   想要避免在組件中使用多個 `useState`，將邏輯集中在一個地方。
+- 當 state 的更新邏輯比較複雜，或涉及多個子值時
+- 當下一個 state 依賴於前一個 state 的值時
+- 想要避免在組件中使用多個 `useState`，將邏輯集中在一個地方
