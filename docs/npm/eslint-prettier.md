@@ -1,8 +1,8 @@
 # [Note] ESLint & Prettier
 
 > [ESLint](https://eslint.org/)
->
-> [ESLint Playground]([ESLint Demo](http://eslint.org/demo/))
+
+> [ESLint Demo](http://eslint.org/demo/)
 
 ## 簡介
 
@@ -69,8 +69,7 @@ ESLint v9 引入 **Flat Config（扁平設定）**成為預設格式，是目前
 
 Flat Config 是一個由**設定物件 (configuration objects) 所組成的陣列**，放置於專案根目錄 (root)：
 
-```javascript
-// eslint.config.js
+```javascript title="eslint.config.js"
 export default [
   // 設定物件 1
   {
@@ -98,8 +97,7 @@ Export 一定要是 ESM 格式 (export default)。Flat Config 支援兩種匯出
 
 1. 直接匯出陣列 (`export default [ ... ]` )
 
-   ```javascript
-   // eslint.config.js
+   ```javascript title="eslint.config.js"
    import js from '@eslint/js';
 
    export default [
@@ -115,8 +113,7 @@ Export 一定要是 ESM 格式 (export default)。Flat Config 支援兩種匯出
 
 2. 使用 **`defineConfig()` helper**（官方建議的最佳實踐）
 
-   ```javascript
-   // eslint.config.js
+   ```javascript title="eslint.config.js"
    import { defineConfig } from 'eslint/config';
    import js from '@eslint/js';
 
@@ -249,8 +246,7 @@ export default [
 
 ### eslint.config.js 完整設定檔範例
 
-```javascript
-// eslint.config.js
+```javascript title="eslint.config.js"
 import { defineConfig } from 'eslint/config';
 import js from '@eslint/js';
 import ts from '@typescript-eslint/eslint-plugin';
@@ -463,7 +459,7 @@ export default tseslint.config(
 
 ### Prettier CLI
 
-```shell
+```bash
 # 安裝 Prettier
 $ npm install --save-dev --save-exact prettier
 
@@ -538,8 +534,7 @@ $ npx prettier --write "app/**/*.test.js"					# 針對匹配的全域路徑(glob
 
 新增 lint 指令：
 
-```json
-// package.json
+```json title="package.json"
 {
   // ...
   "scripts": {
@@ -553,7 +548,7 @@ $ npx prettier --write "app/**/*.test.js"					# 針對匹配的全域路徑(glob
 
 輸入指令，執行腳本：
 
-```shell
+```bash
 $ npm run lint
 $ npm run lint-fix
 $ npm run prettier
@@ -561,8 +556,9 @@ $ npm run prettier
 
 ## VSCode 整合設定
 
-> - [Prettier - Code formatter](https://github.com/prettier/prettier-vscode)
-> - [Prettier ESLint Extension](https://marketplace.visualstudio.com/items?itemName=rvest.vs-code-prettier-eslint)
+> [Prettier - Code formatter](https://github.com/prettier/prettier-vscode)
+
+> [Prettier ESLint Extension](https://marketplace.visualstudio.com/items?itemName=rvest.vs-code-prettier-eslint)
 
 在 `.vscode/settings.json` 加入
 
@@ -590,7 +586,7 @@ $ npm run prettier
 
 整合 Git hooks ，在 CI 階段就自動執行 `prettier --write` ，確保程式碼在 commit 前 (pre-commit) 都已經被 format 過。
 
-```shell
+```bash
 $ npm install --save-dev husky lint-staged
 $ npx husky init
 $ node --eval "fs.writeFileSync('.husky/pre-commit','npx lint-staged\n')"
