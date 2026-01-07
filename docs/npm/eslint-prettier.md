@@ -530,30 +530,6 @@ $ npx prettier --write "app/**/*.test.js"					# 針對匹配的全域路徑(glob
 - `eslint-config-airbnb-typescript`：Airbnb TypeScript 程式碼風格
 - `@next/eslint-config-next`：Next.js 官方規則
 
-## 搭配 package.json 腳本
-
-新增 lint 指令：
-
-```json title="package.json"
-{
-  // ...
-  "scripts": {
-    // ....
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "prettier": "npx prettier --write ."
-  }
-}
-```
-
-輸入指令，執行腳本：
-
-```bash
-$ npm run lint
-$ npm run lint-fix
-$ npm run prettier
-```
-
 ## VSCode 整合設定
 
 > [Prettier - Code formatter](https://github.com/prettier/prettier-vscode)
@@ -578,26 +554,165 @@ $ npm run prettier
 }
 ```
 
-##
+## 搭配 package.json 腳本
+
+新增 lint 指令：
+
+```json title="package.json"
+{
+  // ...
+  "scripts": {
+    // ....
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "prettier": "npx prettier --write ."
+  }
+}
+```
+
+輸入指令，執行腳本：
+
+```bash
+$ npm run lint
+$ npm run lint-fix
+$ npm run prettier
+```
 
 ## 整合 Git Hooks: Husky & lint-staged
 
-> [Pre-commit Hook](https://prettier.io/docs/precommit)
+即使有了程式碼規範與排版設定，要在每次 commit 前手動執行檢查與修正還是挺麻煩的。為了避免不符合規範的程式碼被 commit 上去，可以整合 Git hooks ，在 CI 階段 (pre-commit) 就自動執行 lint 檢查修正與 `prettier --write` ，確保推上 github 的程式碼都是符合規範並且已經被 format 過的。
 
-整合 Git hooks ，在 CI 階段就自動執行 `prettier --write` ，確保程式碼在 commit 前 (pre-commit) 都已經被 format 過。
+這邊要使用到三個工具
+
+1. `Husky` 設定 `pre-commit` hook
+2. `pre-commit` 內呼叫 `lint-staged`
+3. `lint-staged` 執行你設定的檢查與修復命令（如 ESLint、Prettier）
 
 ```bash
+# 安裝 husky 以及 lint-staged
 $ npm install --save-dev husky lint-staged
+
+# 初始化 husky
 $ npx husky init
+
+# 透過 husky pre-commit hook 執行 lint-staged
 $ node --eval "fs.writeFileSync('.husky/pre-commit','npx lint-staged\n')"
 ```
 
-將 lint-staged 加到 `package.json`：
+### Git Hooks
+
+[Git Hooks](https://git-scm.com/book/zh-tw/v2/Customizing-Git-Git-Hooks) 是 Git 提供的機制，允許開發者在特定事件發生時（如：commit 前/中/後），執行指令（如：Shell 腳本或 Node 腳本）。
+| Hook 名稱 | 時機點 | 常見用途 |
+| ------------ | ------- | ------------------------ |
+| `pre-commit` | 提交前 | 格式檢查、lint、測試 |
+| `commit-msg` | 提交訊息產生時 | 驗證 commit message（如規範格式） |
+| `pre-push` | 推送前 | 執行測試、build 檢查等 |
+
+### Husky
+
+[Husky](https://typicode.github.io/husky/) 是一個用來管理 Git Hooks 的工具，支援以 JavaScript 方式設定並加入版本控制。
+
+```bash
+$ npm install --save-dev husky # 或 pnpm add -D husky
+$ npx husky init # 或 pnpm dlx husky install
+```
+
+執行 `husky init` 後會：
+
+1. 在根目錄產生 `.husky/pre-commit` 檔案：
+
+```
+.husky/
+  └─ pre-commit
+```
+
+2. 在 package.json 新增 `prepare` 腳本：
+
+```json
+{
+  "scripts": {
+    "prepare": "husky install"
+  }
+}
+```
+
+這樣一來在 local 端執行 `npm install` 之後就會執行 `husky install`
+
+#### 加入 hook
+
+用 `npx husky add` 來加 hook
+
+```shell
+$ npx husky add .husky/pre-commit "pnpm lint-staged --max-warnings=0 --concurrent --retry=2"
+```
+
+會產生一個 `.husky/pre-commit` 檔案內容如下：
+
+```shell
+pnpm lint-staged --max-warnings=0 --concurrent --retry=2
+```
+
+參數說明：
+
+- `--max-warnings=0`：不允許任何 warning（否則視為失敗）
+- `--concurrent`：同時執行多個 task（效能佳）
+- `--retry=2`：失敗時自動重試兩次（例如格式修復完後再 lint）
+
+:::note
+
+- **舊版 Husky（v4 以前）** 的用法，是寫在 `package.json` 的 `"husky.hooks"`
+- **新版Husky（v7+）** 的用法，是寫成獨立的 shell 腳本在 `.husky/` 資料夾中
+  :::
+
+#### 測試 hook
+
+測試 hook 腳本：加上 `exit 1` 放棄 git 指令
+
+```shell
+# .husky/pre-commit
+
+# Your WIP script
+# ...
+
+exit 1
+```
+
+```shell
+git commit -m "testing pre-commit code"
+# A commit will not be created
+```
+
+:::note
+Husky v9 的重大更新提醒：`#!/usr/bin/env sh` 和 `. "$(dirname -- "$0")/_/husky.sh"`，這兩行在 **未來 Husky v10 將不再需要，也會失效**。
+:::
+
+### lint-staged
+
+lint-staged 是搭配 Husky 使用的工具，它的功用在於只針對 staged 的檔案執行 lint 或 format 指令，不需要掃瞄整個專案，避免不必要的 git diff（提升效能）。
+
+```shell
+$ npm install --save-dev lint-staged
+```
+
+將 [lint-staged](https://www.npmjs.com/package/lint-staged) 加到 `package.json`：
 
 ```json
 {
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "*.+(ts|tsx|jsx|js)": "eslint --cache --fix",
+    "*.+(ts|tsx|jsx|js|json|css|md|mdx|html)": "prettier --write"
   }
 }
 ```
+
+在 `.husky/pre-commit` 檔案加上 `lint-staged`
+
+```shell
+echo "trigger pre-commit" # 確認是否有正確安裝的腳本
+
+npx lint-staged
+```
+
+:::note
+Husky 腳本裡寫的都是 bash 語法
+:::

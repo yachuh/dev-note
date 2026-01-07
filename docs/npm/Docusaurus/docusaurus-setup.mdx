@@ -1,0 +1,209 @@
+---
+title: '[Docusaurus] 建立專案與部署'
+tags: [npm, docusaurus]
+sidebar_position: 1
+---
+
+
+# [Docusaurus] 安裝與部署
+
+Docusaurus 是一個靜態網站生成器 (**static-site-generator**)。由 Facebook 開發，基於 **React** 和 Markdown，專為建立技術文件、開發者筆記和部落格而設計。
+
+- **基於 Next.js 和 React**，可自製 React component 和 layout
+- **支援 Markdown、MDX**，可內嵌 React 元件
+- **支援插件**：支援搜尋（Algolia）、分析（Google Analytics）等功能
+- **支援多語系 (i18n)**
+- **支援多版本文件**：自動管理不同版本內容，用戶可透過下拉選單切換
+
+## 安裝
+
+> [CLI | Docusaurus](https://docusaurus.io/docs/installation#cli)
+
+**建立專案**
+檢查 Node 版本：使用 Node.js 18 或以上
+
+```bash
+$node -v
+```
+
+安裝 Docusaurus：
+
+```bash
+$npx create-docusaurus@latest my-website classic --typescript -p pnpm
+$cd my-website
+$npx docusaurus -V    # 查看版本
+$pnpm run start       # 啟動專案
+```
+
+這裡安裝的是 `v3.4.0` 的
+
+- `classic` 範本
+- `-t, --typescript`：搭配 Typescript
+- `-p, --package-manager`: 使用 `pnpm`（可以是 `npm`, `yarn`, `pnpm` 或 `bun`）
+
+## Folder Structure
+
+```
+my-website
+├── blog			# 部落格文章資料夾
+│   ├── 2019-05-28-hola.md
+│   ├── 2019-05-29-hello-world.md
+│   └── 2020-05-30-welcome.md
+├── docs			# 文檔資料夾
+│   ├── doc1.md
+│   ├── doc2.md
+│   ├── doc3.md
+│   └── mdx.md
+├── src				# 源碼資料夾
+│   ├── css
+│   │   └── custom.css
+│   └── pages		# 自訂頁面
+│       ├── styles.module.css
+│       └── index.js
+├── static			# 靜態資料資料夾（如：圖片）
+│   └── img
+├── docusaurus.config.js	# 設定檔
+├── package.json
+├── README.md
+├── sidebars.js			# 依資料夾結構自動生成導覽
+└── yarn.lock
+```
+- blog：存放 blog 文章
+- docs：存放 doc 文件
+- src：存放非文件的相關資產，像是 `/pages/` 資料夾用來存放 homepage、about 等頁面，`/components/`資料夾用來存放共用的元件
+- static：存放靜態資料，像是圖片
+- docusaurus.config.js：網站的設定檔
+- sidebars.js：用於 doc 的側邊欄，可以自行建立新的側邊欄，也可以使用自動生成的側邊欄
+
+### Configurations
+
+> [docusaurus.config.js](https://docusaurus.io/docs/api/docusaurus-config)
+
+```ts title="docusaurus.config.ts"
+import type { Config } from '@docusaurus/types';
+
+export default {
+  title: 'Docusaurus',
+  tagline: 'Dinosaurs are cool',
+  favicon: 'img/favicon.ico',
+  url: 'https://your-docusaurus-site.example.com',
+  baseUrl: '/',
+
+  // GitHub repo 相關設定，沒有要使用 `docusaurus deploy` 可以不用設定
+  organizationName: 'your-github-username', // GitHub repo 的 user 或 organization 名稱
+  projectName: 'your-repo-name', // GitHub repo 的名稱
+
+  // your site config ...
+} satisfies Config;
+```
+
+Docusaurus 的配置檔包含：
+
+- 網站 metadata：像是 `title`、`tagline`、`url`、`baseUrl`、`favicon`...等
+- 部署相關設定 (Deployment configurations)：像是 `organizationName`、`projectName`、`deploymentBranch`⋯⋯等（詳見 [Deployment](https://docusaurus.io/docs/deployment)）
+- 各種 Theme, plugin⋯⋯等配置設定
+
+## 啟動專案
+
+Run:
+
+```shell
+$pnpm run start
+```
+
+輸入指令啟動開發伺服器，瀏覽器預設於 [http://localhost:3000](http://localhost:3000/) 打開網站。
+
+Build:
+
+```shell
+$pnpm run build
+```
+
+## 部署
+
+### GitHub Pages 部署
+
+**方法一：使用內建指令**
+
+1. 在 `docusaurus.config.js` 加入以下配置：
+
+```javascript
+{
+  // ... 其他配置
+  organizationName: '你的 GitHub 使用者名稱',
+  projectName: '你的 repo 名稱',
+  deploymentBranch: 'gh-pages',
+}
+```
+
+2. 直接部署：
+
+```shell
+$pnpm dun deploy
+```
+
+**方法二：手動部署**
+
+```bash
+$pnpm run build
+$git add build
+$git commit -m "Deploy GitHub pages"
+$git push origin main
+```
+
+### Vercel 部署
+
+1. 將專案 push 到 GitHub
+2. 登入 Vercel 並建立一個新的 Project
+3. 匯入 Git Repository
+4. **Build & Output Settings**：
+   - Build Command: `pnpm run build`
+   - Output Directory: `build`
+   - Install Command: `pnpm install`
+5. 點擊「Deploy」，完成後獲得免費網址
+
+![image-20260106170336364](/Users/yachu_hsieh/Library/Application Support/typora-user-images/image-20260106170336364.png)
+
+### 自動化部署
+
+#### Vercel
+每次 `git push` 後 Vercel 會自動建置部署，不需要手動操作。
+
+1. `git push` 到 GitHub
+2. Vercel 自動偵測 Docusaurus，預設設定：
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `build`
+   - **Install Command**: `npm ci`
+
+每次 `git push` 自動部署，PR 自動產生預覽連結 。
+
+#### GitHub Pages
+
+GitHub Pages 則需設定 GitHub Actions：
+
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy Docusaurus
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: yarn
+    - run: yarn install --frozen-lockfile
+    - run: yarn build
+    - uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
+
+```

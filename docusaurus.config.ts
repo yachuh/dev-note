@@ -2,9 +2,10 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import tailwindPlugin from './plugins/tailwind-config.cjs';
+import idealImage from '@docusaurus/plugin-ideal-image';
 
 const config: Config = {
-  title: "Yachu's Dev Notes",
+  title: "Yachu's Dev Note",
   tagline: 'A place to share my thoughts and notes as a software engineer.',
   favicon: 'img/favicon.ico',
 
@@ -57,11 +58,16 @@ const config: Config = {
     ],
   ],
 
-  plugins: [tailwindPlugin],
+  staticDirectories: ['static','docs', 'blog'],
+
+  plugins: [tailwindPlugin, 'ideal-image'],
 
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
+    metadata: [
+      {name: 'keywords', content: 'software engineer, software developer, yachu, blog, note'},
+    ],
     navbar: {
       title: "Yachu's Dev Note",
       logo: {
